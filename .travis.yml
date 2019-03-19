@@ -11,8 +11,8 @@ stages:
 before_install:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 install:
-  - docker build -t feverai/sample .
-  - docker tag fever feverai/sample:build-$TRAVIS_BUILD_NUMBER
+  - docker build -t feverai/samle .
+  - docker tag feverai/sample feverai/sample:build-$TRAVIS_BUILD_NUMBER
   - docker push feverai/sample:build-$TRAVIS_BUILD_NUMBER
 after_success:
   - docker tag feverai/sample:latest
