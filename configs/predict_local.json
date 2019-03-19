@@ -1,6 +1,6 @@
 {
-  "database": "/Users/james/Documents/phd/fever2-baseline/data/fever/fever.db",
-  "index": "/Users/james/Documents/phd/fever2-baseline/data/index/fever-tfidf-ngram=2-hash=16777216-tokenizer=simple.npz",
+  "database": "data/fever/fever.db",
+  "index": "data/index/fever-tfidf-ngram=2-hash=16777216-tokenizer=simple.npz",
   "n_docs": 5,
   "n_sents": 5,
   "model": "https://jamesthorne.co.uk/fever/fever-da.tar.gz",

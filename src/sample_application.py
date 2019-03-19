@@ -1,5 +1,6 @@
 import json
 from logging.config import dictConfig
+from typing import List, Dict
 
 from allennlp.models import load_archive
 from allennlp.predictors import Predictor
