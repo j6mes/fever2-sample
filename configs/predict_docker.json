@@ -1,0 +1,8 @@
+{
+  "database": "/local/fever-common/data/fever/fever.db",
+  "index": "/local/fever-common/data/index/fever-tfidf-ngram=2-hash=16777216-tokenizer=simple.npz",
+  "n_docs": 5,
+  "n_sents": 5,
+  "model": "https://jamesthorne.co.uk/fever/fever-da.tar.gz",
+  "cuda_device": -1
+}

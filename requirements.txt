@@ -1,1 +1,2 @@
 fever-api
+fever-allennlp
