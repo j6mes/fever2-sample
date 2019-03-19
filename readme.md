@@ -94,8 +94,20 @@ We provide common data (the Wikipedia parse and the preprocessed data associated
 It contains the following files (see [fever.ai/resources.html](https://fever.ai/resources.html) for more info):
 
 ```
+# Dataset
+/local/common/data/fever-data/train.jsonl
+/local/common/data/fever-data/paper_dev.jsonl
+/local/common/data/fever-data/paper_test.jsonl
+/local/common/data/fever-data/shared_task_dev.jsonl
+/local/common/data/fever-data/shared_task_test.jsonl
+
+# Preprocessed Wikipedia Dump 
 /local/common/data/fever/fever.db
+
+# Wikipedia TF-IDF Index
 /local/common/data/index/fever-tfidf-ngram=2-hash=16777216-tokenizer=simple.npz
+
+# Preprocessed Wikipedia Pages (Alternative Format)
 /local/common/data/wiki-pages/wiki-000.jsonl
 ...
 /local/common/data/wiki-pages/wiki-109.jsonl
