@@ -1,7 +1,7 @@
 # Sample FEVER2.0 builder docker image
 
 The FEVER2.0 shared task requires builders to submit Docker images (via dockerhub) as part of the competition to allow 
-for adversarial evaluation. Images will host a web server (by importing the [`fever-api`](https://github.com/j6mes/fever-api) package).
+for adversarial evaluation. Images will host a web server (by installing the [`fever-api`](https://github.com/j6mes/fever-api) pip package).
  
 This repository contains an example submission based on an AllenNLP implementation of the system (see [`fever-allennlp`](https://github.com/j6mes/fever-allennlp)). We go into depth for the following key information:
 
@@ -90,5 +90,15 @@ Outputs:
 
 ## Common Data
 We provide common data (the Wikipedia parse and the preprocessed data associated with the first FEVER challenge), that will be mounted in in `/local/common` 
+
+It contains the following files (see [fever.ai/resources.html](https://fever.ai/resources.html) for more info):
+
+```
+/local/common/data/fever/fever.db
+/local/common/data/index/fever-tfidf-ngram=2-hash=16777216-tokenizer=simple.npz
+/local/common/data/wiki-pages/wiki-000.jsonl
+...
+/local/common/data/wiki-pages/wiki-109.jsonl
+```
 
   
