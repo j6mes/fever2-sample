@@ -6,8 +6,8 @@ for adversarial evaluation. Images will host a web server (by importing the [`fe
 This repository contains an example submission based on an AllenNLP implementation of the system (see [`fever-allennlp`](https://github.com/j6mes/fever-allennlp)). We go into depth for the following key information:
 
 * [Entrypoint](#entrypoint)
-* [Web Server](#web_server)
-* [Common Data](#common_data)
+* [Web Server](#web-server)
+* [Common Data](#common-data)
 
 It can be run with the following commands. The first command creates a dummy container with the shared FEVER data that is used by the submission.
 
