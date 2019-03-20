@@ -38,4 +38,5 @@ ADD configs configs
 ENV PYTHONPATH src
 ENV FLASK_APP sample_application:my_sample_fever
 
-ENTRYPOINT ["flask", "run", "--host=0.0.0.0"]
+ENTRYPOINT ["/bin/bash"]
+CMD ["flask", "run", "--host=0.0.0.0"]
