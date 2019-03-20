@@ -17,3 +17,4 @@ install:
 after_success:
   - docker tag feverai/sample feverai/sample:latest
   - docker push feverai/sample:latest
+  - echo "Done"
