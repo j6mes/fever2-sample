@@ -1,10 +1,11 @@
 # Sample FEVER2.0 builder docker image
 
 The FEVER2.0 shared task requires builders to submit Docker images (via dockerhub) as part of the competition to allow 
-for adversarial evaluation. Images will host a web server (by installing the [`fever-api`](https://github.com/j6mes/fever-api) pip package).
+for adversarial evaluation. Images must contain a single script to make predictions on a given input file using their model and host a web server (by installing the [`fever-api`](https://github.com/j6mes/fever-api) pip package) to allow for interactive evaluation as part of the _breaker_ phase of the competition.
  
 This repository contains an example submission based on an AllenNLP implementation of the system (see [`fever-allennlp`](https://github.com/j6mes/fever-allennlp)). We go into depth for the following key information:
 
+* [Prediction Script](#prediction-script)
 * [Entrypoint](#entrypoint)
 * [Web Server](#web-server)
 * [Common Data](#common-data)
@@ -16,11 +17,51 @@ It can be run with the following commands. The first command creates a dummy con
 docker create --name fever-common feverai/common
 
 #Start the server
-docker run --rm --volumes-from fever-common -p 5000:5000 feverai/sample
+docker run --rm --volumes-from fever-common:ro -p 5000:5000 feverai/sample
+
+#Or make predictions on a single file in a batch 
+docker run --rm --volumes-from fever-common:ro -v $(pwd):/out fever2-sample ./predict.sh /local/common/data/fever-data/paper_dev.jsonl /out/predictions.jsonl
+
 ```
 
+## Prediction Script
+The prediction script should take 2 parameters as input: the path to input file to be predicted and the path the output file to be scored:
+
+An optional `CUDA_DEVICE` environment variable should be set  
+
+```bash
+#!/usr/bin/env bash
+
+default_cuda_device=0
+root_dir=/local/fever-common
+
+
+python -m fever.evidence.retrieve \
+    --index $root_dir/data/index/fever-tfidf-ngram=2-hash=16777216-tokenizer=simple.npz \
+    --database $root_dir/data/fever/fever.db \
+    --in-file $1 \
+    --out-file /tmp/ir.$(basename $1) \
+    --max-page 5 \
+    --max-sent 5
+
+python -m allennlp.run predict \
+    https://jamesthorne.co.uk/fever/fever-da.tar.gz \
+    /tmp/ir.$(basename 1) \
+    --output-file /tmp/labels.$(basename $1) \
+    --predictor fever \
+    --include-package fever.reader \
+    --cuda-device ${CUDA_DEVICE:-$default_cuda_device} \
+    --silent
+
+python -m fever.submission.prepare \
+    --predicted_labels /tmp/labels.$(basename $1) \
+    --predicted_evidence /tmp/ir.$(basename 1) \
+    --out_file $2
+
+``` 
+
 ## Entrypoint
-The submission must run a flask web server. In our application, the entrypoint is a function called `my_sample_fever` in the module `sample_application` (see `sample_application.py`).
+The submission must run a flask web server to allow for interactive evaluation. In our application, the entrypoint is a function called `my_sample_fever` in the module `sample_application` (see `sample_application.py`).
 The `my_sample_fever` function is a factory that returns a `fever_web_api` object. 
 
 ``` python
@@ -44,7 +85,7 @@ Your dockerfile can then use the `flask run` method as the entrypoint, setting a
 
 ```dockerfile
 ENV FLASK_APP sample_application:my_sample_fever
-ENTRYPOINT ["flask","run"]
+CMD ["flask","run"]
 ``` 
 
 
@@ -89,28 +130,28 @@ Outputs:
 
 
 ## Common Data
-We provide common data (the Wikipedia parse and the preprocessed data associated with the first FEVER challenge), that will be mounted in in `/local/common` 
+We provide common data (the Wikipedia parse and the preprocessed data associated with the first FEVER challenge), that will be mounted in in `/local/fever-common` 
 
 It contains the following files (see [fever.ai/resources.html](https://fever.ai/resources.html) for more info):
 
 ```
 # Dataset
-/local/common/data/fever-data/train.jsonl
-/local/common/data/fever-data/paper_dev.jsonl
-/local/common/data/fever-data/paper_test.jsonl
-/local/common/data/fever-data/shared_task_dev.jsonl
-/local/common/data/fever-data/shared_task_test.jsonl
+/local/fever-common/data/fever-data/train.jsonl
+/local/fever-common/data/fever-data/paper_dev.jsonl
+/local/fever-common/data/fever-data/paper_test.jsonl
+/local/fever-common/data/fever-data/shared_task_dev.jsonl
+/local/fever-common/data/fever-data/shared_task_test.jsonl
 
 # Preprocessed Wikipedia Dump 
-/local/common/data/fever/fever.db
+/local/fever-common/data/fever/fever.db
 
 # Wikipedia TF-IDF Index
-/local/common/data/index/fever-tfidf-ngram=2-hash=16777216-tokenizer=simple.npz
+/local/fever-common/data/index/fever-tfidf-ngram=2-hash=16777216-tokenizer=simple.npz
 
 # Preprocessed Wikipedia Pages (Alternative Format)
-/local/common/data/wiki-pages/wiki-000.jsonl
+/local/fever-common/data/wiki-pages/wiki-000.jsonl
 ...
-/local/common/data/wiki-pages/wiki-109.jsonl
+/local/fever-common/data/wiki-pages/wiki-109.jsonl
 ```
 
   

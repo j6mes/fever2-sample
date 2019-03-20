@@ -35,8 +35,10 @@ RUN mkdir -pv configs
 ADD src src
 ADD configs configs
 
+ADD predict.sh .
+
 ENV PYTHONPATH src
 ENV FLASK_APP sample_application:my_sample_fever
 
-ENTRYPOINT ["/bin/bash"]
+#ENTRYPOINT ["/bin/bash","-c"]
 CMD ["flask", "run", "--host=0.0.0.0"]

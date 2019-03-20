@@ -10,6 +10,8 @@ stages:
       if: branch = master
 before_install:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+script:
+  - echo "No script"
 install:
   - docker build -t feverai/sample .
   - docker tag feverai/sample feverai/sample:build-$TRAVIS_BUILD_NUMBER
