@@ -15,5 +15,5 @@ install:
   - docker tag feverai/sample feverai/sample:build-$TRAVIS_BUILD_NUMBER
   - docker push feverai/sample:build-$TRAVIS_BUILD_NUMBER
 after_success:
-  - docker tag feverai/sample:latest
+  - docker tag feverai/sample feverai/sample:latest
   - docker push feverai/sample:latest
