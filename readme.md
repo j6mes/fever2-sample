@@ -19,8 +19,8 @@ docker create --name fever-common feverai/common
 #Start the server
 docker run --rm --volumes-from fever-common:ro -p 5000:5000 feverai/sample
 
-#Or make predictions on a single file in a batch 
-docker run --rm --volumes-from fever-common:ro -v $(pwd):/out fever2-sample ./predict.sh /local/common/data/fever-data/paper_dev.jsonl /out/predictions.jsonl
+#Or make predictions on a single file in a batch (set CUDA_DEVICE as appropriate)
+docker run --rm --volumes-from fever-common:ro -e CUDA_DEVICE=-1 -v $(pwd):/out feverai/sample ./predict.sh /local/fever-common/data/fever-data/paper_dev.jsonl /out/predictions.jsonl
 
 ```
 
