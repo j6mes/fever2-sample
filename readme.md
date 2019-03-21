@@ -22,6 +22,12 @@ docker run --rm --volumes-from fever-common:ro -p 5000:5000 feverai/sample
 #Or make predictions on a single file in a batch (set CUDA_DEVICE as appropriate)
 docker run --rm --volumes-from fever-common:ro -e CUDA_DEVICE=-1 -v $(pwd):/out feverai/sample ./predict.sh /local/fever-common/data/fever-data/paper_dev.jsonl /out/predictions.jsonl
 
+### Shared Resources and Fair Use
+The FEVER2.0 submissions may be run in a shared environemnt. We urge participants to ensure that resources are not use profligately.
+
+Tensorflow users are asked to implement per-process GPU memory limits: [see this post](https://stackoverflow.com/questions/34199233/how-to-prevent-tensorflow-from-allocating-the-totality-of-a-gpu-memory). We will set an environment variable `$TF_GPU_MEMORY_FRACTION` that will be tweaked for all systems in phase 2 of the shared task. 
+
+
 ```
 
 ## Prediction Script
