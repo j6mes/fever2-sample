@@ -20,7 +20,7 @@ docker create --name fever-common feverai/common
 docker run --rm --volumes-from fever-common:ro -p 5000:5000 feverai/sample
 
 #Or make predictions on a single file in a batch 
-docker run --rm --volumes-from fever-common:ro -v $(pwd):/out fever2-sample ./predict.sh /local/common/data/fever-data/paper_dev.jsonl /out/predictions.jsonl
+docker run --rm --volumes-from fever-common:ro -v $(pwd):/out feverai/sample ./predict.sh /local/common/data/fever-data/paper_dev.jsonl /out/predictions.jsonl
 
 ```
 
