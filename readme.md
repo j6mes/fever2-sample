@@ -24,7 +24,7 @@ docker run --rm --volumes-from fever-common:ro -e CUDA_DEVICE=-1 -v $(pwd):/out 
 ```
 
 ### Shared Resources and Fair Use
-The FEVER2.0 submissions may be run in a shared environment and will be moderated. We urge participants to ensure that these shared resources are respected.
+The FEVER2.0 submissions may be run in a shared environment where resources will be moderated. We urge participants to ensure that these shared resources are respected.
 
 Tensorflow users are asked to implement per-process GPU memory limits: [see this post](https://stackoverflow.com/questions/34199233/how-to-prevent-tensorflow-from-allocating-the-totality-of-a-gpu-memory). We will set an environment variable `$TF_GPU_MEMORY_FRACTION` that will be tweaked for all systems in phase 2 of the shared task. 
 
