@@ -3,7 +3,7 @@
 default_cuda_device=0
 root_dir=/local/fever-common
 
-ln -s $root_dir/data data/
+ln -s $root_dir/data data
 
 python -m fever.evidence.retrieve \
     --index $root_dir/data/index/fever-tfidf-ngram=2-hash=16777216-tokenizer=simple.npz \
