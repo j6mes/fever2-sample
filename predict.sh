@@ -28,5 +28,5 @@ python -m allennlp.run predict \
 echo "prepare submission"
 python -m fever.submission.prepare \
     --predicted_labels /tmp/labels.$(basename $1) \
-    --predicted_evidence /tmp/ir.$(basename 1) \
+    --predicted_evidence /tmp/ir.$(basename $1) \
     --out_file $2
