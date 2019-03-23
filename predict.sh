@@ -18,7 +18,7 @@ python -m fever.evidence.retrieve \
 echo "start prediction"
 python -m allennlp.run predict \
     https://jamesthorne.co.uk/fever/fever-da.tar.gz \
-    /tmp/ir.$(basename 1) \
+    /tmp/ir.$(basename $1) \
     --output-file /tmp/labels.$(basename $1) \
     --predictor fever \
     --include-package fever.reader \
