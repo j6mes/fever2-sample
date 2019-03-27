@@ -16,10 +16,10 @@ It can be run with the following commands. The first command creates a dummy con
 #Set up the data container (run once on first time)
 docker create --name fever-common feverai/common
 
-#Start the server
+#Start a server for interactive querying of the FEVER system via the web API on port 5000
 docker run --rm --volumes-from fever-common:ro -p 5000:5000 feverai/sample
 
-#Or make predictions on a single file in a batch (set CUDA_DEVICE as appropriate)
+#Alternatively, make predictions on a batch file and output it to `/out/predictions.jsonl` (set CUDA_DEVICE as appropriate)
 docker run --rm --volumes-from fever-common:ro -e CUDA_DEVICE=-1 -v $(pwd):/out feverai/sample ./predict.sh /local/fever-common/data/fever-data/paper_dev.jsonl /out/predictions.jsonl
 ```
 
