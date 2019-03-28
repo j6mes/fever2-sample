@@ -72,7 +72,7 @@ The `my_sample_fever` function is a factory that returns a `fever_web_api` objec
 ``` python
 from fever.api.web_server import fever_web_api
 
-def my_sample_fever():
+def my_sample_fever(*args):
     # Set up and initialize model
     ...
     
@@ -90,7 +90,7 @@ Your dockerfile can then use the `flask run` method as the entrypoint, setting a
 
 ```dockerfile
 ENV FLASK_APP sample_application:my_sample_fever
-CMD ["flask","run"]
+CMD ["flask","run","--host=0.0.0.0"]
 ``` 
 
 
