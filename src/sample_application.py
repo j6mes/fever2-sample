@@ -26,7 +26,7 @@ def predict_single(predictor, retrieval_method, instance):
     }
 
 
-def my_sample_fever():
+def my_sample_fever(*args):
     logger = logging.getLogger()
     dictConfig({
         'version': 1,
