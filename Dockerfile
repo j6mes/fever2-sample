@@ -41,4 +41,4 @@ ENV PYTHONPATH src
 ENV FLASK_APP sample_application:my_sample_fever
 
 #ENTRYPOINT ["/bin/bash","-c"]
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["waitress-serve", "--host=0.0.0.0", "--port=5000", "--call", "sample_application:my_sample_fever"]

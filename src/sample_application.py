@@ -35,7 +35,7 @@ def my_sample_fever():
         }},
         'handlers': {'wsgi': {
             'class': 'logging.StreamHandler',
-            'stream': 'ext://flask.logging.wsgi_errors_stream',
+            'stream': 'ext://sys.stderr',
             'formatter': 'default'
         }},
         'root': {

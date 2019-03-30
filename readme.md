@@ -86,11 +86,10 @@ def my_sample_fever():
     return fever_web_api(baseline_predict)
 ```
 
-Your dockerfile can then use the `flask run` method as the entrypoint, setting any valid factory as the `FLASK_APP`  
+Your dockerfile can then use the `waitress-serve` method as the entrypoint. This will start a wsgi server calling your factory method
 
 ```dockerfile
-ENV FLASK_APP sample_application:my_sample_fever
-CMD ["flask","run"]
+CMD ["waitress-serve", "--host=0.0.0.0", "--port=5000", "--call", "sample_application:my_sample_fever"]
 ``` 
 
 
