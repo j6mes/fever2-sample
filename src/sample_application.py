@@ -21,7 +21,7 @@ def predict_single(predictor, retrieval_method, instance):
     max_id = predicted["label_logits"].index(max(predicted["label_logits"]))
 
     return {
-        "label":predictor._model.vocab.get_token_from_index(max_id,namespace="labels"),
+        "predicted_label":predictor._model.vocab.get_token_from_index(max_id,namespace="labels"),
         "predicted_evidence": evidence
     }
 
