@@ -105,7 +105,7 @@ Content-Type: application/json
 {
 	"instances":[
 	    {"id":0,"claim":"this is a test claim"}, 
-	    {"id":1,"claim":"this is another test claim"}, 
+	    {"id":1,"claim":"this is another test claim"} 
 	]
 }
 ```
