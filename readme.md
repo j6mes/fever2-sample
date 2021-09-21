@@ -30,7 +30,7 @@ Tensorflow users are asked to implement per-process GPU memory limits: [see this
 
 
 ## Prediction Script
-The prediction script should take 2 parameters as input: the path to input file to be predicted and the path the output file to be scored:
+The prediction script should take 2 parameters as input: the path to the input file to be predicted and the path to the output file to be scored:
 
 An optional `CUDA_DEVICE` environment variable should be set  
 
